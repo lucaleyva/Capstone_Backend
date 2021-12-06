@@ -8,8 +8,9 @@ djangorestframework = "*"
 django-cors-headers = "*"
 pillow = "*"
 mysql-connector-python = "*"
+djangorestframework-simplejwt = "*"
 
 [dev-packages]
 
 [requires]
-python_version = "3.10"
+python_version = "3.9"
