@@ -7,7 +7,7 @@ from rest_framework.response import Response
 from base.models import Product, Order, OrderItem, ShippingAddress
 from base.serializers import ProductSerializer, OrderSerializer
 
-from rest_framework import status
+from rest_framework import serializers, status
 from datetime import datetime
 
 
@@ -53,6 +53,11 @@ def addOrderItems(request):
                 price=i['price'],
                 image=product.image.url,
             )
-        # (4) Update stock
+            
+            # (4) Update stock
+            
+            product.countInStock -= item.qty
+            product.save()
 
-    return Response('ORDER')
+        serializer = OrderSerializer(order, many=False)
+        return Response(serializer.data)
